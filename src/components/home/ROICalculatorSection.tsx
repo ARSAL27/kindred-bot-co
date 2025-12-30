@@ -18,29 +18,43 @@ export function ROICalculatorSection() {
     const hourlyRate = agentRate[0];
     const numAgents = agents[0];
 
-    // Current cost calculations
+    // Your pricing
+    const setupFee = 500; // One-time
+    const monthlyFee = 149; // Per month
+
+    // Current cost calculations (human support)
     const hoursPerMonth = numAgents * 160; // 40 hours * 4 weeks
     const currentMonthlyCost = hoursPerMonth * hourlyRate;
-    const currentAnnualCost = currentMonthlyCost * 12;
 
     // AI automation (80% of tickets)
     const automatedTickets = Math.round(monthlyTickets * 0.8);
     const timesSavedHours = (automatedTickets * avgHandleTimeMinutes) / 60;
-    const costSavings = timesSavedHours * hourlyRate;
-    const annualSavings = costSavings * 12;
+    const monthlySavings = timesSavedHours * hourlyRate;
+    const annualSavings = monthlySavings * 12;
 
-    // ROI
-    const platformCost = 149 * 12; // Professional plan annual
-    const netSavings = annualSavings - platformCost;
-    const roiPercentage = Math.round((netSavings / platformCost) * 100);
-    const paybackMonths = platformCost / costSavings;
+    // Total cost of our service (first year includes setup)
+    const firstYearCost = setupFee + (monthlyFee * 12);
+    const annualCost = monthlyFee * 12; // Subsequent years
+
+    // Net savings (first year)
+    const netFirstYearSavings = annualSavings - firstYearCost;
+    const netAnnualSavings = annualSavings - annualCost; // Subsequent years
+
+    // ROI calculation (first year)
+    const roiPercentage = Math.round((netFirstYearSavings / firstYearCost) * 100);
+
+    // Payback period in months
+    const paybackMonths = monthlySavings > 0 ? (setupFee + monthlyFee) / monthlySavings : 999;
 
     return {
       annualSavings: Math.round(annualSavings),
+      netFirstYearSavings: Math.round(netFirstYearSavings),
+      firstYearCost,
       hoursSaved: Math.round(timesSavedHours * 12),
       roiPercentage,
-      paybackMonths: paybackMonths < 1 ? "< 1" : Math.round(paybackMonths),
+      paybackMonths: paybackMonths < 1 ? "< 1" : paybackMonths > 12 ? "> 12" : Math.round(paybackMonths),
       automatedTickets: automatedTickets * 12,
+      monthlySavings: Math.round(monthlySavings),
     };
   }, [tickets, handleTime, agentRate, agents]);
 
@@ -155,7 +169,15 @@ export function ROICalculatorSection() {
                 <p className="text-3xl font-bold gradient-text">
                   ${calculations.annualSavings.toLocaleString()}
                 </p>
-                <p className="text-sm text-muted-foreground mt-1">Annual Savings</p>
+                <p className="text-sm text-muted-foreground mt-1">Gross Annual Savings</p>
+              </div>
+
+              <div className="glass rounded-2xl p-6 text-center">
+                <TrendingUp className="w-8 h-8 text-success mx-auto mb-3" />
+                <p className="text-3xl font-bold gradient-text">
+                  ${calculations.netFirstYearSavings.toLocaleString()}
+                </p>
+                <p className="text-sm text-muted-foreground mt-1">Net Savings (Year 1)</p>
               </div>
 
               <div className="glass rounded-2xl p-6 text-center">
@@ -167,14 +189,6 @@ export function ROICalculatorSection() {
               </div>
 
               <div className="glass rounded-2xl p-6 text-center">
-                <TrendingUp className="w-8 h-8 text-secondary mx-auto mb-3" />
-                <p className="text-3xl font-bold gradient-text">
-                  {calculations.roiPercentage}%
-                </p>
-                <p className="text-sm text-muted-foreground mt-1">ROI</p>
-              </div>
-
-              <div className="glass rounded-2xl p-6 text-center">
                 <Calculator className="w-8 h-8 text-accent mx-auto mb-3" />
                 <p className="text-3xl font-bold gradient-text">
                   {calculations.paybackMonths}
@@ -183,14 +197,23 @@ export function ROICalculatorSection() {
               </div>
             </div>
 
-            <div className="glass rounded-2xl p-6">
-              <p className="text-muted-foreground mb-2">
-                Based on automating 80% of your support tickets:
-              </p>
-              <p className="text-lg font-semibold">
-                <span className="gradient-text">{calculations.automatedTickets.toLocaleString()}</span> tickets
-                handled automatically each year
-              </p>
+            <div className="glass rounded-2xl p-6 space-y-3">
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground">Your investment (Year 1):</span>
+                <span className="font-semibold">$500 setup + $149/mo = ${calculations.firstYearCost.toLocaleString()}</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground">Monthly savings:</span>
+                <span className="font-semibold text-success">${calculations.monthlySavings.toLocaleString()}/mo</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground">Tickets automated (80%):</span>
+                <span className="font-semibold">{calculations.automatedTickets.toLocaleString()}/year</span>
+              </div>
+              <div className="flex justify-between text-sm pt-2 border-t border-border">
+                <span className="text-muted-foreground">First Year ROI:</span>
+                <span className="font-bold gradient-text">{calculations.roiPercentage}%</span>
+              </div>
             </div>
 
             <Button asChild size="lg" className="w-full gradient-bg hover:opacity-90">
