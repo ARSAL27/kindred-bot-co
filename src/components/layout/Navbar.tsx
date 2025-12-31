@@ -1,34 +1,17 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown, Moon, Sun, Sparkles } from "lucide-react";
+import { Menu, X, Moon, Sun, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
-const navigation = {
-  solutions: [
-    { name: "By Industry", href: "/solutions/industry" },
-    { name: "By Role", href: "/solutions/role" },
-    { name: "By Use Case", href: "/solutions/use-case" },
-  ],
-  resources: [
-    { name: "Blog", href: "/blog" },
-    { name: "Case Studies", href: "/case-studies" },
-    { name: "Documentation", href: "/docs" },
-    { name: "ROI Calculator", href: "/#roi-calculator" },
-  ],
-  main: [
-    { name: "Features", href: "/#features" },
-    { name: "Pricing", href: "/#pricing" },
-    { name: "About", href: "/about" },
-    { name: "Contact", href: "/contact" },
-  ],
-};
+const navigation = [
+  { name: "Solutions", href: "/solutions" },
+  { name: "Features", href: "/features" },
+  { name: "Pricing", href: "/pricing" },
+  { name: "About", href: "/about" },
+  { name: "Contact", href: "/contact" },
+  { name: "Resources", href: "/resources" },
+];
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -79,25 +62,7 @@ export function Navbar() {
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-1">
-              {/* Solutions Dropdown */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="gap-1">
-                    Solutions
-                    <ChevronDown className="w-4 h-4" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="start" className="w-48">
-                  {navigation.solutions.map((item) => (
-                    <DropdownMenuItem key={item.name} asChild>
-                      <Link to={item.href}>{item.name}</Link>
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
-
-              {/* Main Links */}
-              {navigation.main.map((item) => (
+              {navigation.map((item) => (
                 <Button
                   key={item.name}
                   variant="ghost"
@@ -107,23 +72,6 @@ export function Navbar() {
                   <Link to={item.href}>{item.name}</Link>
                 </Button>
               ))}
-
-              {/* Resources Dropdown */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="gap-1">
-                    Resources
-                    <ChevronDown className="w-4 h-4" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="start" className="w-48">
-                  {navigation.resources.map((item) => (
-                    <DropdownMenuItem key={item.name} asChild>
-                      <Link to={item.href}>{item.name}</Link>
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
             </div>
 
             {/* Right Side Actions */}
@@ -174,46 +122,13 @@ export function Navbar() {
           >
             <div className="container-wide py-6 space-y-4">
               <div className="space-y-2">
-                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                  Solutions
-                </p>
-                {navigation.solutions.map((item) => (
+                {navigation.map((item) => (
                   <Link
                     key={item.name}
                     to={item.href}
-                    className="block py-2 hover:text-primary transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
-
-              <div className="space-y-2">
-                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                  Menu
-                </p>
-                {navigation.main.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className="block py-2 hover:text-primary transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
-
-              <div className="space-y-2">
-                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                  Resources
-                </p>
-                {navigation.resources.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className="block py-2 hover:text-primary transition-colors"
+                    className={`block py-2 hover:text-primary transition-colors ${
+                      location.pathname === item.href ? "text-primary" : ""
+                    }`}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item.name}
