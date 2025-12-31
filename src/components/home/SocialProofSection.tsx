@@ -2,9 +2,9 @@ import { useEffect, useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
 const companyLogos = [
-  "Acme Corp", "GlobalTech", "InnovateLabs", "TechVentures", "CloudScale",
-  "DataFlow", "NextGen AI", "SmartSystems", "FutureTech", "DigiCorp",
-  "StreamLine", "CodeCraft", "ByteWorks", "NexusPoint", "QuantumLeap"
+  "Joe's Barbershop", "Bella's Salon", "Main Street Grill", "City Auto Repair", 
+  "Sunrise Dental", "Fit Life Gym", "Pet Care Plus", "Urban Spa", "Home Pro Services",
+  "Fresh Bites Cafe", "Elite Cuts", "Valley Veterinary", "Prime Fitness", "Quick Lube Auto"
 ];
 
 const stats = [
@@ -58,8 +58,8 @@ export function SocialProofSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="heading-3 mb-4">Trusted by 10,000+ Companies Worldwide</h2>
-          <p className="text-muted-foreground">From startups to Fortune 500 companies</p>
+          <h2 className="heading-3 mb-4">Trusted by 10,000+ Local Businesses</h2>
+          <p className="text-muted-foreground">From barbershops to restaurants to auto shops</p>
         </motion.div>
 
         {/* Logo Carousel */}

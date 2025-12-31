@@ -2,108 +2,150 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
-  ShoppingCart,
-  Code,
-  Heart,
-  Building2,
-  Wallet,
-  GraduationCap,
-  Plane,
+  UtensilsCrossed,
+  Scissors,
+  Car,
+  Dumbbell,
+  Stethoscope,
+  Home,
+  ShoppingBag,
+  Sparkles,
+  Wrench,
+  PawPrint,
   ArrowRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const useCases = [
   {
-    id: "ecommerce",
-    icon: ShoppingCart,
-    name: "E-commerce",
+    id: "restaurants",
+    icon: UtensilsCrossed,
+    name: "Restaurants & Cafes",
     benefits: [
-      "Automate order tracking and returns",
-      "Personalized product recommendations",
-      "24/7 cart abandonment recovery",
-      "Instant inventory inquiries",
+      "24/7 reservation booking & confirmation",
+      "Menu inquiries & dietary info instantly",
+      "Handle delivery & takeout orders",
+      "Reduce no-shows with smart reminders",
     ],
-    stat: "45% increase in conversions",
-    cta: "View E-commerce Case Study",
+    stat: "60% fewer missed reservations",
+    cta: "View Restaurant Case Study",
   },
   {
-    id: "saas",
-    icon: Code,
-    name: "SaaS",
+    id: "barbershops",
+    icon: Scissors,
+    name: "Barber Shops & Salons",
     benefits: [
-      "Streamlined user onboarding",
-      "Technical support automation",
-      "Billing and subscription queries",
-      "Feature adoption assistance",
+      "Instant appointment scheduling",
+      "Automated booking reminders",
+      "Service pricing & availability",
+      "Handle walk-in inquiries after hours",
     ],
-    stat: "60% reduction in support tickets",
-    cta: "View SaaS Case Study",
+    stat: "45% more bookings",
+    cta: "View Salon Case Study",
   },
   {
-    id: "healthcare",
-    icon: Heart,
-    name: "Healthcare",
+    id: "automotive",
+    icon: Car,
+    name: "Auto Shops & Dealers",
+    benefits: [
+      "Service appointment scheduling",
+      "Quote requests automation",
+      "Parts availability inquiries",
+      "Follow-up on estimates 24/7",
+    ],
+    stat: "3x faster response time",
+    cta: "View Auto Shop Case Study",
+  },
+  {
+    id: "fitness",
+    icon: Dumbbell,
+    name: "Gyms & Fitness Studios",
+    benefits: [
+      "Class booking & cancellations",
+      "Membership inquiries automation",
+      "Personal training scheduling",
+      "Facility hours & info instantly",
+    ],
+    stat: "50% reduction in front desk calls",
+    cta: "View Fitness Case Study",
+  },
+  {
+    id: "medical",
+    icon: Stethoscope,
+    name: "Medical & Dental Clinics",
     benefits: [
       "24/7 appointment scheduling",
-      "Patient FAQ automation",
-      "HIPAA compliant messaging",
+      "Insurance & billing questions",
       "Prescription refill requests",
+      "After-hours patient support",
     ],
     stat: "80% patient satisfaction",
-    cta: "View Healthcare Case Study",
+    cta: "View Medical Case Study",
   },
   {
     id: "realestate",
-    icon: Building2,
-    name: "Real Estate",
+    icon: Home,
+    name: "Real Estate Agencies",
     benefits: [
       "Instant property inquiries",
-      "Automated viewing scheduling",
+      "Automated showing scheduling",
       "Lead qualification 24/7",
-      "Virtual tour assistance",
+      "Neighborhood info & pricing",
     ],
     stat: "3x more qualified leads",
     cta: "View Real Estate Case Study",
   },
   {
-    id: "finance",
-    icon: Wallet,
-    name: "Finance",
+    id: "retail",
+    icon: ShoppingBag,
+    name: "Retail & Boutiques",
     benefits: [
-      "Account balance inquiries",
-      "Fraud alert handling",
-      "Loan application support",
-      "Secure transaction verification",
+      "Product availability checks",
+      "Store hours & location info",
+      "Order tracking assistance",
+      "Personal shopping recommendations",
     ],
-    stat: "70% cost reduction",
-    cta: "View Finance Case Study",
+    stat: "40% increase in foot traffic",
+    cta: "View Retail Case Study",
   },
   {
-    id: "education",
-    icon: GraduationCap,
-    name: "Education",
+    id: "spas",
+    icon: Sparkles,
+    name: "Spas & Wellness Centers",
     benefits: [
-      "Course enrollment automation",
-      "Student support 24/7",
-      "Admissions assistance",
-      "Learning resource guidance",
+      "Treatment booking & info",
+      "Package & membership inquiries",
+      "Gift card purchases",
+      "Cancellation & rescheduling",
     ],
-    stat: "50% faster enrollment",
-    cta: "View Education Case Study",
+    stat: "55% fewer phone calls",
+    cta: "View Spa Case Study",
   },
   {
-    id: "travel",
-    icon: Plane,
-    name: "Travel",
+    id: "contractors",
+    icon: Wrench,
+    name: "Home Services & Contractors",
     benefits: [
-      "Booking assistance",
-      "Real-time itinerary changes",
-      "24/7 travel support",
-      "Loyalty program management",
+      "Quote requests 24/7",
+      "Service scheduling",
+      "Emergency availability info",
+      "Project status updates",
     ],
-    stat: "40% higher bookings",
-    cta: "View Travel Case Study",
+    stat: "2x more service calls booked",
+    cta: "View Contractor Case Study",
+  },
+  {
+    id: "veterinary",
+    icon: PawPrint,
+    name: "Veterinary & Pet Services",
+    benefits: [
+      "Appointment scheduling",
+      "Pet care questions answered",
+      "Vaccination reminders",
+      "Emergency triage assistance",
+    ],
+    stat: "70% reduction in wait times",
+    cta: "View Veterinary Case Study",
   },
 ];
 
@@ -120,20 +162,20 @@ export function UseCasesSection() {
           className="text-center mb-16"
         >
           <span className="text-sm font-semibold text-primary uppercase tracking-wider">
-            Use Cases
+            Built For Local Business
           </span>
           <h2 className="heading-2 mt-4 mb-4">
-            Built for <span className="gradient-text">Every Industry</span>
+            AI That Works for <span className="gradient-text">Every Industry</span>
           </h2>
           <p className="body-large max-w-2xl mx-auto">
-            See how businesses across industries are transforming with AI
+            From restaurants to retail, see how local businesses are automating customer service and booking more appointments
           </p>
         </motion.div>
 
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Tab Navigation */}
           <div className="lg:col-span-1">
-            <div className="glass rounded-2xl p-2 space-y-2">
+            <div className="glass rounded-2xl p-2 space-y-1 max-h-[500px] overflow-y-auto">
               {useCases.map((useCase) => (
                 <button
                   key={useCase.id}
@@ -145,7 +187,7 @@ export function UseCasesSection() {
                   }`}
                 >
                   <useCase.icon className="w-5 h-5 shrink-0" />
-                  <span className="font-medium">{useCase.name}</span>
+                  <span className="font-medium text-sm">{useCase.name}</span>
                 </button>
               ))}
             </div>

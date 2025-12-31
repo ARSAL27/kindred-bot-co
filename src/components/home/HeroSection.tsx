@@ -44,14 +44,14 @@ export function HeroSection() {
 
             {/* Headline */}
             <h1 className="heading-1 mb-6">
-              Transform Customer Support with{" "}
-              <span className="gradient-text">AI Agents</span> That Never Sleep
+              AI Chatbots for{" "}
+              <span className="gradient-text">Local Businesses</span> That Never Sleep
             </h1>
 
             {/* Subheadline */}
             <p className="body-large mb-8 max-w-xl mx-auto lg:mx-0">
-              Deploy intelligent chatbots in under 5 minutes. Automate 80% of queries. 
-              Reduce support costs by 70%. No coding required.
+              Perfect for restaurants, barbershops, salons, and more. Book appointments, 
+              answer questions, and capture leads 24/7. Setup in 5 minutes.
             </p>
 
             {/* CTAs */}
