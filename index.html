@@ -22,6 +22,14 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script id="messenger-widget-b" src="https://cdn.botpenguin.com/website-bot.js" defer>695781d72cd09804d72c993c,6957817c959c8904cafbf4ef</script>
+    <script>
+      var script = document.createElement('script');
+      script.id = 'chatbotscript';
+      script.dataset.accountid = '3IdTx3ANxEHjMH8ptpil9Q==';
+      script.dataset.websiteid = 'd0wx/X42Fwb5opkeWxg+LA==';
+      script.dataset.apidomain = 'https://api.robofy.ai/';
+      script.src = 'https://app.robofy.ai/bot/js/common.js?v=' + new Date().getTime();
+      document.head.appendChild(script);
+    </script>
   </body>
 </html>
